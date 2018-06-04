@@ -1,8 +1,6 @@
-<img src="https://github.com/0xcert/ethereum-erc20/raw/master/cover.png" />
+<img src="https://github.com/0xcert/ethereum-erc20/raw/master/assets/cover.png" />
 
 ![Build Status](https://travis-ci.org/0xcert/ethereum-erc20.svg?branch=master)&nbsp;[![NPM Version](https://badge.fury.io/js/@0xcert%2Fethereum-erc20.svg)](https://badge.fury.io/js/0xcert%2Fethereum-erc20)&nbsp;[![Dependencies Status](https://david-dm.org/0xcert/ethereum-erc20.svg)](https://david-dm.org/0xcert/ethereum-erc20)&nbsp;[![Bug Bounty](https://img.shields.io/badge/bounty-pending-2930e8.svg)](https://github.com/0xcert/ethereum-erc20/issues)
-
-# ERC-20 Token
 
 This is a complete implementation of the [ERC-20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) fungible token standard for the Ethereum blockchain. This is an open source project build with [Truffle](http://truffleframework.com) framework.
 
