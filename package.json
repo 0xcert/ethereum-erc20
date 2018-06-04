@@ -1,0 +1,59 @@
+{
+  "name": "@0xcert/ethereum-erc20",
+  "version": "1.0.0",
+  "description": "Fungible token standard implementation for the Ethereum blockchain.",
+  "main": "truffle.js",
+  "directories": {
+    "contracts": "contracts",
+    "migrations": "migrations",
+    "test": "test"
+  },
+  "scripts": {
+    "clean": "rm -Rf ./build",
+    "compile": "truffle compile",
+    "console": "truffle console",
+    "flatten": "mkdir -p build && truffle-flattener contracts/**/*.sol >> build/bundle.sol",
+    "lint": "eslint './**/*.js?(x)'",
+    "migrate": "truffle migrate",
+    "networks": "truffle networks",
+    "postpublish": "npm run clean",
+    "prepublish": "npm run compile",
+    "test": "npm run clean && truffle test"
+  },
+  "author": "0xcert",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xcert/ethereum-erc20.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0xcert/etheethereum-erc20reum/issues"
+  },
+  "homepage": "https://github.com/0xcert/ethereum-erc20#readme",
+  "keywords": [
+    "ethereum",
+    "blockchain",
+    "eth",
+    "contract",
+    "contracts",
+    "smart",
+    "smart-contract",
+    "smart-contracts",
+    "token",
+    "tokens",
+    "fungible",
+    "fungability",
+    "eip",
+    "erc",
+    "erc20",
+    "erc-20",
+    "standard"
+  ],
+  "devDependencies": {
+    "truffle": "^4.1.11",
+    "truffle-flattener": "^1.2.5"
+  },
+  "dependencies": {
+    "@0xcert/ethereum-utils": "^1.0.0"
+  }
+}
