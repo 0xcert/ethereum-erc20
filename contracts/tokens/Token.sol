@@ -1,6 +1,7 @@
 pragma solidity ^0.4.24;
 
 import "../../node_modules/@0xcert/ethereum-utils/contracts/math/SafeMath.sol";
+import "./ERC20.sol";
 
 
 /*
@@ -8,7 +9,7 @@ import "../../node_modules/@0xcert/ethereum-utils/contracts/math/SafeMath.sol";
  * @dev Standard ERC20 token. This contract follows the
  * implementation at https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
  */
-contract Token {
+contract Token is ERC20 {
   using SafeMath for uint256;
 
   /**
