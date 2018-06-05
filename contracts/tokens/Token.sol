@@ -14,22 +14,22 @@ contract Token {
   /**
    * Token name.
    */
-  string tokenName;
+  string internal tokenName;
 
   /**
    * Token symbol.
    */
-  string tokenSymbol;
+  string internal tokenSymbol;
 
   /**
    * Number of decimals.
    */
-  uint8 tokenDecimals;
+  uint8 internal tokenDecimals;
 
   /**
    * Total supply of tokens.
    */
-  uint256 tokenTotalSupply;
+  uint256 internal tokenTotalSupply;
 
   /**
    * Balance information map.
