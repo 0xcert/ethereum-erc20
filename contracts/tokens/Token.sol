@@ -120,7 +120,7 @@ contract Token {
   {
     require(_value <= balances[msg.sender]);
 
-    balances[msg.sender] = balances[msg.sender].sub(_value); // will fail on insufficient funds
+    balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
 
     emit Transfer(msg.sender, _to, _value);
