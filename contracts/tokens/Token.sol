@@ -16,18 +16,15 @@ contract Token {
    */
   string tokenName;
 
-
   /**
    * Token symbol.
    */
   string tokenSymbol;
 
-
   /**
    * Number of decimals.
    */
   uint8 tokenDecimals;
-
 
   /**
    * Total supply of tokens.
