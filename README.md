@@ -48,7 +48,7 @@ $ npm run test
 To interact with package's contracts within JavaScript code, you simply need to require that package's .json files:
 
 ```js
-const contract = require("@0xcert/ethereum-erc20/build/contracts/FToken.json");
+const contract = require("@0xcert/ethereum-erc20/build/contracts/Token.json");
 console.log(contract);
 ```
 
@@ -56,45 +56,24 @@ console.log(contract);
 
 #### Creating smart contract
 
-The easiest way to start is to create a new file under `contracts/tokens/` (e.g. `MyNFToken.sol`):
+The easiest way to start is to create a new file under `contracts/tokens/` (e.g. `MyToken.sol`):
 
 ```sol
 pragma solidity ^0.4.24;
 
-import "../tokens/FToken.sol";
+import "../tokens/Token.sol";
 
-contract MyFToken is FToken {
+contract MyToken is Token {
 
-  constructor(
-    string _name,
-    string _symbol
-  )
+  constructor()
     public
   {
-    nftName = _name;
-    nftSymbol = _symbol;
+    tokenName = "My Token";
+    tokenSymbol = "MTK";
+    tokenDecimals = 18;
+    tokenTotalSupply = 100000000000000000000000000;
+    balances[msg.sender] = totalTokenSupply; // Give the owner of the contract the whole balance
   }
-
-  function mint(
-    address _owner,
-    uint256 _id
-  )
-    onlyOwner
-    external
-  {
-    super._mint(_owner, _id);
-  }
-
-  function burn(
-    address _owner,
-    uint256 _tokenId
-  )
-    onlyOwner
-    external
-  {
-    super._burn(_owner, _tokenId);
-  }
-
 }
 ```
 
