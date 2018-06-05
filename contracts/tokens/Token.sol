@@ -97,7 +97,7 @@ contract Token {
    */
   function totalSupply()
     external
-    constant
+    view
     returns (uint256 _totalSupply)
   {
     _totalSupply = tokenTotalSupply;
