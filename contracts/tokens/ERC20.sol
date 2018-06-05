@@ -92,11 +92,19 @@ interface ERC20 {
   /**
    * @dev Trigger when tokens are transferred, including zero value transfers.
    */
-  event Transfer(address indexed _from, address indexed _to, uint256 _value);
+  event Transfer(
+    address indexed _from,
+    address indexed _to,
+    uint256 _value
+  );
 
   /**
    * @dev Trigger on any successful call to approve(address _spender, uint256 _value).
    */
-  event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+  event Approval(
+    address indexed _owner,
+    address indexed _spender,
+    uint256 _value
+  );
 
 }
