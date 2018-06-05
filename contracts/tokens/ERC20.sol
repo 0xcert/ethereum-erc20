@@ -10,7 +10,7 @@ interface ERC20 {
    */
   function name()
     external
-    constant
+    view
     returns (string _name);
 
   /**
@@ -18,7 +18,7 @@ interface ERC20 {
    */
   function symbol()
     external
-    constant
+    view
     returns (string _symbol);
 
   /**
@@ -26,7 +26,7 @@ interface ERC20 {
    */
   function decimals()
     external
-    constant
+    view
     returns (uint8 _decimals);
 
   /**
@@ -34,7 +34,7 @@ interface ERC20 {
    */
   function totalSupply()
     external
-    constant
+    view
     returns (uint256 _totalSupply);
 
   /**
@@ -43,7 +43,7 @@ interface ERC20 {
    */
   function balanceOf(address _owner)
     external
-    constant
+    view
     returns (uint256 _balance);
 
   /**
@@ -86,7 +86,7 @@ interface ERC20 {
    */
   function allowance(address _owner, address _spender)
     external
-    constant // TODO: this is depricated and we should use `view` instead
+    view
     returns (uint256 _remaining);
 
   /**
