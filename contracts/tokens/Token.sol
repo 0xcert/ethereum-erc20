@@ -133,7 +133,7 @@ contract Token is ERC20 {
     balances[_to] = balances[_to].add(_value);
 
     emit Transfer(msg.sender, _to, _value);
-    return true;
+    _success = true;
   }
 
   /**
