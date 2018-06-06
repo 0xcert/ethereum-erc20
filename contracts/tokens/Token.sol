@@ -162,7 +162,7 @@ contract Token is ERC20 {
    */
   function allowance(address _owner, address _spender)
     external
-    view // TODO: this is depricated and we should use `view` instead
+    view
     returns (uint256 _remaining)
   {
     _remaining = allowed[_owner][_spender];
