@@ -113,4 +113,5 @@ contract('erc/Token', (accounts) => {
     await assertRevert(token.transferFrom(owner, recipient, ownerSupply.plus(1),
       { from: allowedAccount}));
   });
+
 });
