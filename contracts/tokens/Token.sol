@@ -3,13 +3,13 @@ pragma solidity ^0.4.24;
 import "@0xcert/ethereum-utils/contracts/math/SafeMath.sol";
 import "./ERC20.sol";
 
-
-/*
+/**
  * @title ERC20 standard token implementation.
- * @dev Standard ERC20 token. This contract follows the
- * implementation at https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
+ * @dev Standard ERC20 token. This contract follows the implementation at https://goo.gl/mLbAPJ.
  */
-contract Token is ERC20 {
+contract Token is
+  ERC20
+{
   using SafeMath for uint256;
 
   /**
@@ -108,7 +108,9 @@ contract Token is ERC20 {
    * @dev Returns the account balance of another account with address _owner.
    * @param _owner The address from which the balance will be retrieved.
    */
-  function balanceOf(address _owner)
+  function balanceOf(
+    address _owner
+  )
     external
     view
     returns (uint256 _balance)
@@ -117,13 +119,15 @@ contract Token is ERC20 {
   }
 
   /**
-   * @dev Transfers _value amount of tokens to address _to, and MUST fire the
-   * Transfer event. The function SHOULD throw if the _from account balance does
-   * not have enough tokens to spend.
+   * @dev Transfers _value amount of tokens to address _to, and MUST fire the Transfer event. The
+   * function SHOULD throw if the _from account balance does not have enough tokens to spend.
    * @param _to The address of the recipient.
    * @param _value The amount of token to be transferred.
    */
-  function transfer(address _to, uint256 _value)
+  function transfer(
+    address _to,
+    uint256 _value
+  )
     public
     returns (bool _success)
   {
@@ -137,13 +141,15 @@ contract Token is ERC20 {
   }
 
   /**
-   * @dev Allows _spender to withdraw from your account multiple times, up to
-   * the _value amount. If this function is called again it overwrites the current
-   * allowance with _value.
+   * @dev Allows _spender to withdraw from your account multiple times, up to the _value amount. If
+   * this function is called again it overwrites the current allowance with _value.
    * @param _spender The address of the account able to transfer the tokens.
    * @param _value The amount of tokens to be approved for transfer.
    */
-  function approve(address _spender, uint256 _value)
+  function approve(
+    address _spender,
+    uint256 _value
+  )
     public
     returns (bool _success)
   {
@@ -160,7 +166,10 @@ contract Token is ERC20 {
    * @param _owner The address of the account owning tokens.
    * @param _spender The address of the account able to transfer the tokens.
    */
-  function allowance(address _owner, address _spender)
+  function allowance(
+    address _owner,
+    address _spender
+  )
     external
     view
     returns (uint256 _remaining)
@@ -169,13 +178,17 @@ contract Token is ERC20 {
   }
 
   /**
-   * @dev Transfers _value amount of tokens from address _from to address _to,
-   * and MUST fire the Transfer event.
-   * @param _from The address of the sender
-   * @param _to The address of the recipient
-   * @param _value The amount of token to be transferred
+   * @dev Transfers _value amount of tokens from address _from to address _to, and MUST fire the
+   * Transfer event.
+   * @param _from The address of the sender.
+   * @param _to The address of the recipient.
+   * @param _value The amount of token to be transferred.
    */
-  function transferFrom(address _from, address _to, uint256 _value)
+  function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+  )
     public
     returns (bool _success)
   {
@@ -189,4 +202,5 @@ contract Token is ERC20 {
     emit Transfer(_from, _to, _value);
     _success = true;
   }
+
 }
