@@ -124,7 +124,7 @@ contract Token is ERC20 {
    * @param _value The amount of token to be transferred.
    */
   function transfer(address _to, uint256 _value)
-    external
+    public
     returns (bool _success)
   {
     require(_value <= balances[msg.sender]);
@@ -144,7 +144,7 @@ contract Token is ERC20 {
    * @param _value The amount of tokens to be approved for transfer.
    */
   function approve(address _spender, uint256 _value)
-    external
+    public
     returns (bool _success)
   {
     require((_value == 0) || (allowed[msg.sender][_spender] == 0));
@@ -176,7 +176,7 @@ contract Token is ERC20 {
    * @param _value The amount of token to be transferred
    */
   function transferFrom(address _from, address _to, uint256 _value)
-    external
+    public
     returns (bool _success)
   {
     require(_value <= balances[_from]);
