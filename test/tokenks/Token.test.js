@@ -12,6 +12,9 @@ contract('erc/Token', (accounts) => {
   const tokenDecimals = "18";
   const ownerSupply = new web3.BigNumber('3e+26');
 
+  // To send the right amount of tokens, taking in account number of decimals.
+  const decimalsMul = new web3.BigNumber('1e+18');
+
   beforeEach(async () => {
     token = await Token.new();
   });
@@ -42,15 +45,17 @@ contract('erc/Token', (accounts) => {
   });
 
   it('recipient and sender have correct balances after transfer', async () => {
-    await token.transfer(recipient, 100);
+    const tokenAmount = decimalsMul.mul(100);
+    await token.transfer(recipient, tokenAmount);
     const actualSenderBalance = await token.balanceOf(owner);
     const actualRecipientBalance = await token.balanceOf(recipient);
-    assert.equal(actualSenderBalance.toString(), ownerSupply.minus(100).toString());
-    assert.equal(actualRecipientBalance.toString(), '100');
+    assert.equal(actualSenderBalance.toString(), ownerSupply.minus(tokenAmount).toString());
+    assert.equal(actualRecipientBalance.toString(), tokenAmount.toString());
   });
 
   it('emits Transfer event on transfer', async () => {
-    const { logs } = await token.transfer(recipient, 100);
+    const tokenAmount = decimalsMul.mul(100);
+    const { logs } = await token.transfer(recipient, tokenAmount);
     const event = logs.find(e => e.event === 'Transfer');
     assert.notEqual(event, undefined);
   });
@@ -61,51 +66,62 @@ contract('erc/Token', (accounts) => {
   });
 
   it('returns the correct allowance amount after approval', async () => {
-    await token.approve(recipient, 100);
+    const tokenAmount = decimalsMul.mul(100);
+    await token.approve(recipient, tokenAmount);
     const actualAllowance = await token.allowance(owner, recipient);
-    assert.equal(actualAllowance, 100);
+    assert.equal(actualAllowance.toString(), tokenAmount.toString());
   });
 
   it('emits Approval event after approval', async () => {
-    const { logs } = await token.approve(recipient, 100);
+    const tokenAmount = decimalsMul.mul(100);
+    const { logs } = await token.approve(recipient, tokenAmount);
     const event = logs.find(e => e.event === 'Approval');
     assert.notEqual(event, undefined);
   });
 
   it('reverts if owner wants to reset allowance before setting it to 0 first', async () => {
-    await token.approve(recipient, 100);
-    await assertRevert(token.approve(recipient, 50));
+    const tokenAmount = decimalsMul.mul(100);
+    const newTokenAmount = decimalsMul.mul(50);
+    await token.approve(recipient, tokenAmount);
+    await assertRevert(token.approve(recipient, newTokenAmount));
   });
 
   it('successfully resets allowance', async () => {
-    await token.approve(recipient, 100);
+    const tokenAmount = decimalsMul.mul(100);
+    const newTokenAmount = decimalsMul.mul(50);
+    await token.approve(recipient, tokenAmount);
     await token.approve(recipient, 0);
-    await token.approve(recipient, 50);
+    await token.approve(recipient, newTokenAmount);
     const actualAllowance = await token.allowance(owner, recipient);
-    assert.equal(actualAllowance, 50);
+    assert.equal(actualAllowance.toString(), newTokenAmount.toString());
   });
 
   it('returns correct balances after transfering from another account', async () => {
-    await token.approve(allowedAccount, 100);
-    await token.transferFrom(owner, recipient, 100, { from: allowedAccount });
+    const tokenAmount = decimalsMul.mul(100);
+    await token.approve(allowedAccount, tokenAmount);
+    await token.transferFrom(owner, recipient, tokenAmount, { from: allowedAccount });
     const balanceOwner = await token.balanceOf(owner);
     const balanceRecipient = await token.balanceOf(recipient);
     const balanceAllowedAcc = await token.balanceOf(allowedAccount);
-    assert.equal(balanceOwner.toString(), ownerSupply.minus(100).toString());
+    assert.equal(balanceOwner.toString(), ownerSupply.minus(tokenAmount).toString());
     assert.equal(balanceAllowedAcc.toNumber(), 0);
-    assert.equal(balanceRecipient.toNumber(), 100);
+    assert.equal(balanceRecipient.toNumber(), tokenAmount.toString());
   });
 
   it('emits Transfer event on transferFrom', async () => {
-    await token.approve(allowedAccount, 100);
-    const { logs } = await token.transferFrom(owner, recipient, 100, { from: allowedAccount });
+    const tokenAmount = decimalsMul.mul(100);
+    await token.approve(allowedAccount, tokenAmount);
+    const { logs } = await token.transferFrom(owner, recipient, tokenAmount,
+      { from: allowedAccount });
     const event = logs.find(e => e.event === 'Transfer');
     assert.notEqual(event, undefined);
   });
 
   it('throws when trying to transferFrom more than allowed amount', async () => {
-    await token.approve(allowedAccount, 99);
-    await assertRevert(token.transferFrom(owner, recipient, 100, { from: accounts[1] }));
+    const tokenAmountAllowed = decimalsMul.mul(99);
+    const tokenAmount = decimalsMul.mul(100);
+    await token.approve(allowedAccount, tokenAmountAllowed);
+    await assertRevert(token.transferFrom(owner, recipient, tokenAmount, { from: accounts[1] }));
   });
 
   it('throws an error when trying to transferFrom more than _from has', async () => {
